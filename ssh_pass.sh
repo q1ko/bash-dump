@@ -21,4 +21,7 @@ fi
 # Restart SSH Service if changes were made
 if [ "$enable_password_auth" = "y" ] || [ "$enable_root_login" = "y" ]; then
     sudo systemctl restart sshd
-    ec
+    echo "SSH configuration changes applied."
+else
+    echo "No SSH configuration changes were made."
+fi
