@@ -1,0 +1,1 @@
+bash <(wget -qO- LINK)
