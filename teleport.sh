@@ -7,7 +7,7 @@ read -p "Enter the username for the Teleport user: " teleport_username
 read -p "Enter the FQDN for the Teleport cluster: " teleport_fqdn
 
 # Prompt for ACME email
-read -p "Enter the email for ACME: " teleport_email
+read -p "Enter ACME email: " teleport_email
 
 apt update && apt install curl -y
 curl https://goteleport.com/static/install.sh | bash -s 15.1.1
@@ -45,6 +45,6 @@ echo "Fixed teleport.service file."
 systemctl enable teleport
 systemctl start teleport
 
-sleep 3
+sleep 5
 
 tctl users add $teleport_username --roles=editor,access --logins=root,ubuntu,ec2-user
