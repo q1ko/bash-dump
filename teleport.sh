@@ -8,7 +8,7 @@ read -p "Enter the FQDN for the Teleport cluster: " teleport_fqdn
 
 echo "$teleport_username $teleport_fqdn"
 
-apt install systemctl openssl curl -y
+apt update && apt install systemctl openssl curl -y
 curl https://goteleport.com/static/install.sh | bash -s 15.1.1
 
 
