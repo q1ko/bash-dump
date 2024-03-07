@@ -6,6 +6,8 @@ read -p "Enter the username for the Teleport user: " teleport_username
 # Prompt for FQDN
 read -p "Enter the FQDN for the Teleport cluster: " teleport_fqdn
 
+echo "$teleport_username $teleport_fqdn"
+
 curl https://goteleport.com/static/install.sh | bash -s 15.1.1
 
 apt install systemctl openssl -y
@@ -55,3 +57,7 @@ echo "Fixed teleport.service file."
 
 systemctl enable teleport
 systemctl start teleport
+
+clear
+
+sudo tctl users add $teleport_username --roles=editor,access --logins=root,ubuntu,ec2-user
