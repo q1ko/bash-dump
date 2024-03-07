@@ -33,5 +33,25 @@ teleport configure -o file \
     --cert-file="$teleport_host_fullchain" \
     --key-file="$teleport_host_privkey" 
 
+# Path to teleport.service file
+teleport_service_file="/usr/lib/systemd/system/teleport.service"
+
+# Check if the teleport.service file exists
+if [ ! -f "$teleport_service_file" ]; then
+    echo "Error: teleport.service file not found at $teleport_service_file"
+    exit 1
+fi
+
+# Absolute path to pkill command
+pkill_path="/usr/bin/pkill"
+
+# Replace ExecReload directive with absolute path to pkill
+sed -i "s|^ExecReload=.*|ExecReload=$pkill_path -HUP -L -F /run/teleport.pid|" "$teleport_service_file"
+
+# Reload the Systemd daemon to apply changes
+systemctl daemon-reload
+
+echo "Fixed teleport.service file."
+
 systemctl enable teleport
 systemctl start teleport
