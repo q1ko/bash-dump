@@ -18,7 +18,7 @@ teleport_cluster_name="$teleport_fqdn"
 teleport_public_addr="$teleport_fqdn:443"
 
 # Run teleport configure command
-sudo teleport configure -o file \
+teleport configure -o file \
     --acme --acme-email=$teleport_email \
     --cluster-name=$teleport_fqdn
 
