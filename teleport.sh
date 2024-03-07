@@ -8,7 +8,7 @@ read -p "Enter the FQDN for the Teleport cluster: " teleport_fqdn
 
 curl https://goteleport.com/static/install.sh | bash -s 15.1.1
 
-apt install systemctl openssl tctl -y
+apt install systemctl openssl -y
 
 # Define variables
 teleport_host_privkey="/var/lib/teleport/privkey.pem"
