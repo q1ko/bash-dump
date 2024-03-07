@@ -36,6 +36,3 @@ sudo teleport configure -o file \
 # Enable and start Teleport service
 sudo systemctl enable teleport >/dev/null
 sudo systemctl start teleport >/dev/null
-
-# Add Teleport user with specified roles and logins
-sudo tctl users add "$teleport_username" --roles=editor,access --logins=root,ubuntu,ec2-user
