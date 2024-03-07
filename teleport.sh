@@ -8,9 +8,9 @@ read -p "Enter the FQDN for the Teleport cluster: " teleport_fqdn
 
 echo "$teleport_username $teleport_fqdn"
 
+apt install systemctl openssl curl -y
 curl https://goteleport.com/static/install.sh | bash -s 15.1.1
 
-apt install systemctl openssl -y
 
 # Define variables
 teleport_host_privkey="/var/lib/teleport/privkey.pem"
@@ -35,6 +35,7 @@ teleport configure -o file \
     --cert-file="$teleport_host_fullchain" \
     --key-file="$teleport_host_privkey" 
 
+
 # Path to teleport.service file
 teleport_service_file="/usr/lib/systemd/system/teleport.service"
 
@@ -54,6 +55,7 @@ sed -i "s|^ExecReload=.*|ExecReload=$pkill_path -HUP -L -F /run/teleport.pid|" "
 systemctl daemon-reload
 
 echo "Fixed teleport.service file."
+
 
 systemctl enable teleport
 systemctl start teleport
