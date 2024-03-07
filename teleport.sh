@@ -9,9 +9,6 @@ read -p "Enter the FQDN for the Teleport cluster: " teleport_fqdn
 # Prompt for ACME email
 read -p "Enter ACME email: " teleport_email
 
-apt update
-apt install curl -y
-
 curl https://goteleport.com/static/install.sh | bash -s 15.1.1
 
 
