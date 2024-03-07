@@ -1,5 +1,9 @@
 #!/bin/bash
 
+curl https://goteleport.com/static/install.sh | bash -s 15.1.1
+
+clear
+
 # Prompt for username
 read -p "Enter the username for the Teleport user: " teleport_username
 
