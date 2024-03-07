@@ -56,10 +56,10 @@ systemctl daemon-reload
 
 echo "Fixed teleport.service file."
 
-
 systemctl enable teleport
 systemctl start teleport
 
 clear
+sleep 3
 
 tctl users add $teleport_username --roles=editor,access --logins=root,ubuntu,ec2-user
