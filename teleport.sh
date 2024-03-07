@@ -9,9 +9,11 @@ read -p "Enter the FQDN for the Teleport cluster: " teleport_fqdn
 # Prompt for ACME email
 read -p "Enter ACME email: " teleport_email
 
-apt update > /dev/null
-apt install curl -y >/dev/null
-curl https://goteleport.com/static/install.sh | bash -s 15.1.1 > /dev/null
+apt update
+apt install curl -y
+
+curl https://goteleport.com/static/install.sh | bash -s 15.1.1
+
 
 # Define variables
 teleport_cluster_name="$teleport_fqdn"
@@ -19,8 +21,8 @@ teleport_public_addr="$teleport_fqdn:443"
 
 # Run teleport configure command
 teleport configure -o file \
-    --acme --acme-email="$teleport_email" \
-    --cluster-name="$teleport_fqdn" > /dev/null
+    --acme --acme-email=$teleport_email \
+    --cluster-name=$teleport_fqdn
 
 # Path to teleport.service file
 teleport_service_file="/usr/lib/systemd/system/teleport.service"
@@ -38,10 +40,10 @@ pkill_path="/usr/bin/pkill"
 sed -i "s|^ExecReload=.*|ExecReload=$pkill_path -HUP -L -F /run/teleport.pid|" "$teleport_service_file"
 
 # Reload the Systemd daemon to apply changes
-systemctl daemon-reload > /dev/null
+systemctl daemon-reload
 
-systemctl enable teleport > /dev/null
-systemctl start teleport > /dev/null
+systemctl enable teleport
+systemctl start teleport
 
 sleep 5
 
